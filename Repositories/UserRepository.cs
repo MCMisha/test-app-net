@@ -21,4 +21,17 @@ public class UserRepository
     {
         return _appDbContext.Users.FirstOrDefault(user => user.Id == id);
     }
+
+    public User? AddNew(User newUserData)
+    {
+        var existingUser = _appDbContext.Users.FirstOrDefault(user =>
+            user.Email.Equals(newUserData.Email) || user.Login.Equals(newUserData.Login));
+        if (existingUser == null)
+        {
+            var newUser = _appDbContext.Users.Add(newUserData).Entity;
+            _appDbContext.SaveChanges();
+            return newUser;
+        }
+        return null;
+    }
 }

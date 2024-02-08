@@ -21,4 +21,9 @@ public class UserService
     {
         return _userRepository.GetById(id);
     }
+
+    public User? AddNewUser(User newUserData)
+    {
+        return _userRepository.AddNew(newUserData);
+    }
 }

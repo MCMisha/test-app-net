@@ -33,7 +33,13 @@ namespace WebApplication4.Controllers
             User? user = _userService.GetUserById(id);
             return user != null ? Ok(user) : NotFound($"Użytkownik o id {id} nie został znaleziony");
         }
-        
+
+        [HttpPost("new")]
+        public IActionResult AddNewUser(User newUserData)
+        {
+            User? newUser = _userService.AddNewUser(newUserData);
+            return newUser != null ? Ok(newUserData) : BadRequest();
+        }
         
     }
 }
